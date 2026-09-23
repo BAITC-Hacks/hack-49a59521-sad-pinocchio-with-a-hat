@@ -7,16 +7,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=(".env", "backend/.env"), extra="ignore")
-    stt_provider: Literal["api", "local", "mock"] = "mock"
+    stt_provider: Literal["api", "local", "mock"] = "local"
     ai_provider: Literal["api", "mock"] = "mock"
-    diarization_provider: Literal["local", "mock"] = "mock"
+    diarization_provider: Literal["local", "mock"] = "local"
     stt_api_url: str = ""
     stt_api_key: str = ""
     stt_model: str = ""
     ai_api_url: str = ""
     ai_api_key: str = ""
     ai_model: str = ""
-    whisper_model: str = "small"
+    whisper_model: str = "./models/whisper-small"
     whisper_device: str = "cpu"
     whisper_compute_type: str = "int8"
     whisper_download_root: str = "./models"
