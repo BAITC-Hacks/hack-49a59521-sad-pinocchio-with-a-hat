@@ -66,7 +66,7 @@ class Pipeline:
                 )
             if meeting.providers["diarization"] == "local":
                 meeting.warnings.append(
-                    "Локальная диаризация: fallback с одним неопределённым говорящим."
+                    "Локальная диаризация: pyannote.audio; при недоступности модели используется fallback."
                 )
             elif meeting.providers["stt"] != "mock":
                 meeting.warnings.append(

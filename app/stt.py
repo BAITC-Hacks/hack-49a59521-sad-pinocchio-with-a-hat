@@ -1,8 +1,8 @@
-import os
 from abc import ABC, abstractmethod
 from pathlib import Path
 
 import httpx
+import os
 
 from app.config import Settings
 from app.audio import normalized_audio
@@ -105,11 +105,11 @@ class LocalWhisperProvider(SpeechToTextProvider):
 
                 model_path = Path(
                     download_model(
-                        s.whisper_model, local_files_only=True, cache_dir=s.whisper_download_root
+                        s.whisper_model,
+                        local_files_only=True,
+                        cache_dir=s.whisper_download_root,
                     )
                 )
-            # WhisperModel otherwise falls back to an online tokenizer download,
-            # even when model loading itself uses local_files_only=True.
             for required in ("model.bin", "config.json", "tokenizer.json"):
                 if not (model_path / required).is_file():
                     raise ProviderError(
