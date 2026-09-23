@@ -1,0 +1,7 @@
+storage/
+__pycache__/
+.venv/
+.env
+
+# Local portable FFmpeg binaries are not committed to the repository.
+tools/ffmpeg/
