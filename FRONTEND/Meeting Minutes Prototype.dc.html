@@ -597,7 +597,7 @@ class Component extends DCLogic {
   state = {
     screen: 'start', variant: this.props.variant || 'A', consent: false, anon: false, link: '',
     upTab: 'upload', file: null, fileName: '', fileSizeLabel: '', meetingId: null, pct: 0, exportOpen: false, fmt: 'pdf', confirmed: false,
-    backendStatus: null, backendError: null, backendMeeting: null,
+    backendStatus: null, backendError: null, backendMeeting: null, transcript: [],
     items: SUM_ITEMS, log: LOG, remTab: 'all', lang: 'Eng', dirty: false, toast: null,
     dDone: false, dWho: 'Saule Tulegenova', dDue: '2026-09-19',
     dHistory: [{when:'17.09.2026 10:02',who:'Olga Petrova',what:'Deadline: 18.09.2026 → 19.09.2026'},{when:'16.09.2026 11:40',who:'System',what:'Extracted from transcript at 00:09:12'}]
@@ -630,7 +630,7 @@ class Component extends DCLogic {
     const file = this.state.file;
     if (!file) return;
     try {
-      this.setState({backendError: null, pct: 3});
+      this.setState({backendError: null, backendStatus: 'uploading', items: [], transcript: [], pct: 3});
       const form = new FormData();
       form.append('file', file, file.name);
       form.append('title', 'Board preparation');
@@ -657,6 +657,9 @@ class Component extends DCLogic {
       } else if (status.status === 'completed') {
         const meetingResponse = await fetch(API_BASE + '/api/meetings/' + meetingId);
         const meeting = await meetingResponse.json();
+        if (meeting.providers && meeting.providers.stt === 'mock') {
+          throw new Error('Backend работает в mock-режиме STT и не анализирует загруженный файл. Установите STT_PROVIDER=local и перезапустите backend.');
+        }
         const items = (meeting.tasks || []).map((task, index) => ({id: task.id || index + 1, text: task.title, who: task.assignee_name || task.assignee || '', due: task.deadline || '', time: ''}));
         const transcript = ((meeting.transcript && meeting.transcript.segments) || []).map(segment => ({time: this.formatSeconds(segment.start), sp: segment.speaker_id || 'Speaker', lang: meeting.language || 'RU', text: segment.text, bg: 'transparent'}));
         this.setState({backendStatus: 'completed', backendMeeting: meeting, items, transcript, pct: 100});
@@ -784,13 +787,13 @@ class Component extends DCLogic {
       pctLabel: s.pct + '%', etaLabel: s.pct >= 100 ? 'Done' : 'About ' + mins + ' min left',
       stages, procRunning: s.pct < 100, procDone: s.pct >= 100,
       cancelProc: e => { e.preventDefault(); clearInterval(this._p); this.setState({pct: 0}); this.go('start'); },
-      sumTitle: A ? 'Weekly operations' : 'Board preparation',
-      sumMeta: A ? '22.09.2026 · Zoom · 00:52 · 8 participants · recorded live' : '22.09.2026 · Uploaded file · 01:12 · 6 speakers · processed after the meeting',
+      sumTitle: !A && s.backendMeeting ? s.backendMeeting.title : (A ? 'Weekly operations' : 'Board preparation'),
+      sumMeta: !A && s.backendMeeting ? ((s.backendMeeting.date || '') + ' · Uploaded file · ' + (s.backendMeeting.filename || '') + ' · ' + ((s.backendMeeting.speakers || []).length || 0) + ' speakers') : (A ? '22.09.2026 · Zoom · 00:52 · 8 participants · recorded live' : '22.09.2026 · Uploaded file · 01:12 · 6 speakers · processed after the meeting'),
       sumPrimaryLabel: s.confirmed ? 'Export minutes' : 'Confirm and send tasks',
       sumPrimary: () => { if (s.confirmed) this.setState({exportOpen: true}); else if (missing) this.toastMsg('Add the missing responsible person and deadline first'); else { this.setState({confirmed: true}); this.toastMsg('4 tasks sent to Tasks. Reminders scheduled.'); } },
       reviewLabel: s.confirmed ? 'Sent to Tasks' : missing ? missing + ' need review' : 'All items complete',
       reviewColor: missing && !s.confirmed ? RED : 'var(--sk-grey-700)',
-      sumItems, transcript: (s.transcript || TRANSCRIPT.map(t => ({time: t[0], sp: t[1], lang: t[2], text: t[3], bg: t[4] ? 'oklch(0.97 0.025 75)' : 'transparent'}))),
+      sumItems, transcript: (!A && s.transcript ? s.transcript : TRANSCRIPT.map(t => ({time: t[0], sp: t[1], lang: t[2], text: t[3], bg: t[4] ? 'oklch(0.97 0.025 75)' : 'transparent'}))),
       dStatus: s.dDone ? 'Completed' : dOver ? 'Overdue' : 'In progress',
       dBadgeBg: s.dDone ? 'var(--sk-grey-100)' : dOver ? 'oklch(0.96 0.025 28)' : '#fff',
       dBadgeColor: s.dDone ? 'var(--sk-grey-700)' : dOver ? RED : 'var(--sk-navy-900)',
