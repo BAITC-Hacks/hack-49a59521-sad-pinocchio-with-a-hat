@@ -1,0 +1,51 @@
+:root{
+/* Brand — sampled from sk.kz / qsamruk.kz */
+--sk-navy-900:#17335D;   /* headings, portal top bar, primary buttons */
+--sk-navy-800:#283652;   /* footer, active date tab, loader bar */
+--sk-gold-500:#A78C6D;   /* gold accent: card top bars, secondary buttons, underlines */
+--sk-gold-600:#937E65;   /* pressed gold, active pager dot */
+--sk-gold-300:#D8B56D;   /* portal active nav item */
+--sk-tan-400:#AA9D8A;    /* inactive date tabs, nav hover/active fill */
+--sk-blue-600:#0260BA;   /* text links ("More →") */
+/* Neutrals */
+--sk-white:#FFFFFF;
+--sk-grey-50:#F7F7F7;
+--sk-grey-100:#EEEEEE;   /* card fill on page */
+--sk-grey-150:#ECECEC;   /* page background, dropdown fill */
+--sk-grey-200:#DADADA;   /* ornament light */
+--sk-grey-300:#D1D1D1;   /* partner band */
+--sk-grey-350:#CDCDCD;   /* ornament dark */
+--sk-grey-400:#C4C4C4;   /* dropdown hover row */
+--sk-grey-500:#9B9B9B;
+--sk-grey-700:#555555;
+--sk-ink:#212121;        /* body text on sk.kz */
+--sk-input-border:#CBD4E1;
+
+/* Semantic */
+--surface-page:var(--sk-grey-150);
+--surface-card:var(--sk-white);
+--surface-card-muted:var(--sk-grey-100);
+--surface-header:var(--sk-white);
+--surface-footer:var(--sk-navy-800);
+--surface-band:var(--sk-grey-300);
+--surface-dropdown:var(--sk-grey-150);
+--surface-dropdown-hover:var(--sk-grey-400);
+--surface-portal-bar:var(--sk-navy-900);
+
+--text-heading:var(--sk-navy-900);
+--text-body:var(--sk-ink);
+--text-muted:var(--sk-grey-700);
+--text-link:var(--sk-blue-600);
+--text-inverse:var(--sk-white);
+--text-accent:var(--sk-gold-500);
+
+--accent-primary:var(--sk-navy-900);
+--accent-primary-dark:var(--sk-navy-800);
+--accent-gold:var(--sk-gold-500);
+--accent-gold-pressed:var(--sk-gold-600);
+--accent-tan:var(--sk-tan-400);
+
+--border-subtle:var(--sk-grey-300);
+--border-input:var(--sk-input-border);
+--border-gold:var(--sk-gold-500);
+}
