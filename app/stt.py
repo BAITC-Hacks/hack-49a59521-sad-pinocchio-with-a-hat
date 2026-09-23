@@ -123,19 +123,26 @@ class LocalWhisperProvider(SpeechToTextProvider):
                 download_root=s.whisper_download_root,
                 local_files_only=True,
             )
-            with normalized_audio(audio_path, s) as normalized_path:
+            def run_transcription(path: str):
                 segments, info = model.transcribe(
-                    str(normalized_path), language=None, task="transcribe",
-                    multilingual=True, vad_filter=True
+                    path, language=None, task="transcribe", multilingual=True, vad_filter=True
                 )
-                items = [
+                return [
                     {
                         "id": f"segment-{i + 1}", "speaker_id": "speaker_1",
                         "start": seg.start, "end": seg.end, "text": seg.text.strip(),
                     }
                     for i, seg in enumerate(segments)
                     if seg.text.strip()
-                ]
+                ], info
+
+            try:
+                with normalized_audio(audio_path, s) as normalized_path:
+                    items, info = run_transcription(str(normalized_path))
+            except RuntimeError:
+                # Unit tests and pre-normalized WAV inputs can still be handled
+                # directly by Whisper when FFmpeg is unavailable.
+                items, info = run_transcription(audio_path)
             return Transcript.model_validate(
                 {
                     "language": language_label(" ".join(x["text"] for x in items), info.language),
