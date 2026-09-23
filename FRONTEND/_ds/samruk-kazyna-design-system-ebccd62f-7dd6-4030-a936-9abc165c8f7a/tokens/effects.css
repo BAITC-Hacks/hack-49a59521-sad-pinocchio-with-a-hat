@@ -1,0 +1,19 @@
+:root{
+--radius-none:0;      /* sk.kz: everything square */
+--radius-sm:2px;      /* qsamruk.kz buttons / inputs */
+--radius-round:999px; /* pager dots, social icons */
+
+--shadow-none:none;
+--shadow-panel:0 4px 24px rgba(23,51,93,.08);    /* qsamruk floating search / section panels */
+--shadow-tile:0 2px 8px rgba(0,0,0,.06);
+--shadow-dropdown:0 6px 16px rgba(0,0,0,.08);
+
+--border-hair:1px solid var(--sk-grey-300);
+
+--ease-standard:cubic-bezier(.4,0,.2,1); /* @kind other */
+--dur-fast:150ms; /* @kind other */
+--dur-base:250ms; /* @kind other */
+--dur-slide:600ms; /* @kind other */
+
+--overlay-hero:linear-gradient(rgba(23,51,93,.45),rgba(23,51,93,.45)); /* @kind other */
+}

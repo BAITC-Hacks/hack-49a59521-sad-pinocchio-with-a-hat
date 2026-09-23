@@ -1,0 +1,34 @@
+:root{
+--font-corporate:'PT Sans','PT Sans Caption','Trebuchet MS',sans-serif; /* sk.kz */
+--font-portal:'Rubik','Segoe UI',sans-serif;                          /* qsamruk.kz */
+--font-body:var(--font-corporate);
+--font-heading:var(--font-corporate);
+
+--fw-regular:400; /* @kind font */
+--fw-medium:500; /* @kind font */
+--fw-bold:700; /* @kind font */
+
+/* sk.kz scale (CSS px, measured from 2x screenshots) */
+--fs-display:36px;   /* section titles: "Event feed" */
+--fs-h1:30px;        /* hero slide headline */
+--fs-h3:18px;        /* uppercase card heads: HOTLINE */
+--fs-lead:18px;      /* date tabs, card body */
+--fs-body:16px;      /* paragraphs, nav */
+--fs-small:14px;     /* news card titles, meta */
+--fs-micro:12px;
+
+--lh-tight:1.15; /* @kind font */
+--lh-snug:1.2; /* @kind font */
+--lh-body:1.5; /* @kind font */
+--lh-loose:1.7; /* @kind font */
+
+/* qsamruk.kz scale */
+--fs-portal-hero:34px;
+--fs-portal-stat:36px;
+--fs-portal-h2:24px;   /* ПОБЕДИТЕЛИ КОНКУРСА — uppercase bold */
+--fs-portal-body:15px;
+--fs-portal-small:13px;
+
+--ls-caps:0.01em; /* @kind font */
+--ls-wordmark:0.6em; /* @kind font */   /* K A Z Y N A letterspacing in mark */
+}

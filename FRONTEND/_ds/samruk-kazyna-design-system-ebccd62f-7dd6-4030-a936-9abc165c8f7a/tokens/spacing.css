@@ -1,0 +1,14 @@
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;--space-20:80px;
+
+--container-corporate:1180px;  /* sk.kz content column */
+--container-portal:1200px;     /* qsamruk.kz content column */
+--header-h:66px;               /* sk.kz header bar */
+--portal-topbar-h:44px;
+--portal-header-h:86px;
+--hero-h:464px;
+--date-tab-h:64px;
+--control-h:42px;              /* portal inputs */
+--button-h:37px;               /* portal header buttons */
+--card-bar-h:9px;              /* gold bar atop info cards */
+}

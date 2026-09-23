@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/brand-assets.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/styles.css">
+  <script src="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:var(--sk-grey-150);font-family:var(--font-corporate);color:var(--sk-ink)}
+    a{color:var(--sk-blue-600);text-decoration:none}a:hover{text-decoration:underline}
+    *{box-sizing:border-box}
+    @keyframes recpulse{0%,100%{opacity:1}50%{opacity:.3}}
+  </style>
+</helmet>
+<div style="display:flex;flex-direction:column;height:100vh;min-width:1100px;">
+  <header style="flex:none;background:#fff;border-bottom:1px solid var(--sk-grey-300);display:flex;align-items:center;gap:24px;padding:0 32px;height:72px;">
+    <a href="Task Tracker Dashboard.dc.html" title="Back" style="display:flex;align-items:center;">
+      <img src="assets/logo-navy.svg" alt="Samruk-Kazyna" style="height:28px;width:auto;">
+    </a>
+    <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+      <span style="font-size:20px;color:var(--sk-navy-900);line-height:1.2;">Weekly operations</span>
+      <span style="font-size:13px;color:var(--sk-grey-700);">Zoom · 23.09.2026 · 8 participants</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-left:12px;padding:0 14px;height:36px;border:1px solid var(--sk-grey-300);border-radius:2px;">
+      <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--sk-grey-500);"></span>
+        <span style="font-size:15px;color:var(--sk-grey-700);">Paused</span>
+      </sc-if>
+      <sc-if value="{{ recording }}" hint-placeholder-val="{{ true }}">
+        {{ recDot }}
+        <span style="font-size:15px;color:var(--sk-ink);">Recording</span>
+      </sc-if>
+      <span style="font-size:15px;color:var(--sk-grey-700);font-variant-numeric:tabular-nums;">{{ elapsed }}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sk-grey-700);">
+      Languages detected:
+      <span style="padding:1px 6px;border:1px solid var(--sk-grey-300);border-radius:2px;">RU</span>
+      <span style="padding:1px 6px;border:1px solid var(--sk-grey-300);border-radius:2px;">KZ</span>
+      <span style="padding:1px 6px;border:1px solid var(--sk-grey-300);border-radius:2px;">RU+KZ</span>
+    </div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+      <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="ghost" size="sm" on-click="{{ togglePause }}" hint-size="100px,32px">{{ pauseLabel }}</x-import>
+      <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" on-click="{{ endMeeting }}" hint-size="180px,37px">End and summarize</x-import>
+    </div>
+  </header>
+
+  <div style="flex:none;display:flex;align-items:center;gap:12px;padding:10px 32px;background:var(--sk-grey-100);border-bottom:1px solid var(--sk-grey-300);font-size:14px;color:var(--sk-ink);">
+    <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="shield-check" size="18px" color="var(--sk-gold-600)" hint-size="18px,18px"></x-import>
+    <span style="flex:1;">This meeting is being recorded and transcribed by AI. All participants were notified in the Zoom chat at 10:00 and when joining.</span>
+    <span style="color:var(--sk-grey-700);">Consent confirmed by host · 23.09.2026 10:00</span>
+  </div>
+
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:20px;padding:20px 32px 24px;">
+    <section style="background:#fff;border:1px solid var(--sk-grey-300);display:flex;flex-direction:column;min-height:0;position:relative;">
+      <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--sk-grey-100);">
+        <span style="font-size:18px;color:var(--sk-navy-900);">Live transcript</span>
+        <span style="font-size:13px;color:var(--sk-grey-700);">{{ followLabel }}</span>
+      </div>
+      <div ref="{{ feedRef }}" onScroll="{{ onScroll }}" style="flex:1;min-height:0;overflow-y:auto;padding:8px 0 24px;">
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="8">
+          <div id="{{ l.domId }}" style="display:grid;grid-template-columns:76px 36px minmax(0,1fr);gap:12px;padding:10px 24px;background:{{ l.bg }};transition:background .6s ease-out;">
+            <span style="font-size:13px;color:var(--sk-grey-700);padding-top:9px;font-variant-numeric:tabular-nums;">{{ l.time }}</span>
+            <span style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:{{ l.color }};">{{ l.initial }}</span>
+            <span style="display:flex;flex-direction:column;gap:3px;">
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:14px;font-weight:700;color:var(--sk-navy-900);">{{ l.speaker }}</span>
+                <span style="font-size:11px;padding:0 5px;border:1px solid var(--sk-grey-300);color:var(--sk-grey-700);border-radius:2px;">{{ l.lang }}</span>
+              </span>
+              <span style="font-size:16px;line-height:1.5;color:var(--sk-ink);text-wrap:pretty;">{{ l.text }}</span>
+            </span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ showPartial }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:76px 36px minmax(0,1fr);gap:12px;padding:10px 24px;">
+            <span></span>
+            <span style="width:32px;height:32px;border-radius:50%;border:1.5px dashed var(--sk-grey-400);"></span>
+            <span style="font-size:16px;line-height:1.5;color:var(--sk-grey-500);padding-top:4px;">Listening…</span>
+          </div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ showJump }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ jumpLive }}" style="position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;height:36px;padding:0 16px;border:0;border-radius:18px;background:var(--sk-navy-900);color:#fff;font-family:var(--font-corporate);font-size:14px;cursor:pointer;box-shadow:0 4px 24px rgba(23,51,93,.2);">
+          <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="arrow-down" size="16px" color="#fff" hint-size="16px,16px"></x-import>
+          {{ jumpLabel }}
+        </button>
+      </sc-if>
+    </section>
+
+    <aside style="background:#fff;border:1px solid var(--sk-grey-300);display:flex;flex-direction:column;min-height:0;">
+      <div style="height:9px;background:var(--sk-gold-500);flex:none;"></div>
+      <div style="flex:none;display:flex;align-items:baseline;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--sk-grey-100);">
+        <span style="font-size:18px;color:var(--sk-navy-900);">Action items detected</span>
+        <span style="font-size:15px;color:var(--sk-grey-700);">{{ itemCount }}</span>
+      </div>
+      <div style="flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;">
+        <sc-if value="{{ noItems }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:32px 16px;text-align:center;font-size:15px;color:var(--sk-grey-700);">Tasks will appear here when someone assigns work with a person or a deadline.</div>
+        </sc-if>
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="3">
+          <div style="border:1px solid {{ it.border }};background:{{ it.bg }};padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:background .8s ease-out,border-color .8s ease-out;">
+            <sc-if value="{{ it.viewing }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <span style="flex:1;font-size:16px;line-height:1.35;color:var(--sk-navy-900);text-wrap:pretty;">{{ it.text }}</span>
+                <sc-if value="{{ it.isNew }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex:none;padding:1px 7px;font-size:12px;background:var(--sk-gold-500);color:#fff;border-radius:2px;">New</span>
+                </sc-if>
+              </div>
+              <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;">
+                <span style="color:var(--sk-grey-700);">Responsible</span><span style="color:{{ it.whoColor }};">{{ it.whoLabel }}</span>
+                <span style="color:var(--sk-grey-700);">Deadline</span><span style="color:{{ it.dueColor }};">{{ it.dueLabel }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;font-size:14px;">
+                <a href="#" onClick="{{ it.onSource }}">Said at {{ it.time }}</a>
+                <span style="flex:1;"></span>
+                <button onClick="{{ it.onEdit }}" style="border:0;background:none;padding:0;color:var(--sk-navy-900);font-family:var(--font-corporate);font-size:14px;cursor:pointer;text-decoration:underline;">Edit</button>
+                <button onClick="{{ it.onDismiss }}" style="border:0;background:none;padding:0;color:var(--sk-grey-700);font-family:var(--font-corporate);font-size:14px;cursor:pointer;">Not a task</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ it.editing }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ it.dText }}" onChange="{{ it.onDText }}" rows="2" style="width:100%;resize:vertical;padding:8px 10px;border:1px solid var(--border-input);border-radius:2px;font-family:var(--font-corporate);font-size:15px;line-height:1.35;color:var(--sk-navy-900);"></textarea>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <select value="{{ it.dWho }}" onChange="{{ it.onDWho }}" style="height:34px;padding:0 8px;border:1px solid var(--border-input);border-radius:2px;background:#fff;font-family:var(--font-corporate);font-size:14px;">
+                  <option value="">Not assigned</option>
+                  <sc-for list="{{ people }}" as="p" hint-placeholder-count="0"><option value="{{ p }}">{{ p }}</option></sc-for>
+                </select>
+                <input type="date" value="{{ it.dDue }}" onChange="{{ it.onDDue }}" style="height:34px;padding:0 8px;border:1px solid var(--border-input);border-radius:2px;font-family:var(--font-corporate);font-size:14px;">
+              </div>
+              <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="ghost" size="sm" on-click="{{ it.onCancel }}" hint-size="90px,32px">Cancel</x-import>
+                <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" size="sm" on-click="{{ it.onSave }}" hint-size="80px,32px">Save</x-import>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:none;padding:12px 20px;border-top:1px solid var(--sk-grey-100);font-size:13px;line-height:1.4;color:var(--sk-grey-700);">Items are drafts until the meeting ends. You will review and confirm them on the summary screen.</div>
+    </aside>
+  </div>
+</div>
+
+<sc-if value="{{ ended }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;background:rgba(23,51,93,.3);z-index:40;display:flex;align-items:center;justify-content:center;">
+    <div style="width:460px;background:#fff;box-shadow:0 4px 24px rgba(23,51,93,.16);">
+      <div style="height:9px;background:var(--sk-gold-500);"></div>
+      <div style="padding:28px 32px;display:flex;flex-direction:column;gap:14px;">
+        <span style="font-size:24px;color:var(--sk-navy-900);">End the meeting recording?</span>
+        <span style="font-size:15px;line-height:1.5;color:var(--sk-ink);">The bot will leave the call. The summary and {{ itemCount }} action items will be ready to review in about a minute.</span>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+          <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="outline" size="sm" on-click="{{ cancelEnd }}" hint-size="140px,32px">Keep recording</x-import>
+          <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" size="sm" on-click="{{ finish }}" hint-size="160px,32px">End and summarize</x-import>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PEOPLE = ['Aigerim Seitkali','Daniyar Nurlanov','Marat Abenov','Saule Tulegenova','Yerlan Kassym','Olga Petrova'];
+const SPK = {
+  1:{name:'Speaker 1 · Chair',initial:'1',color:'var(--sk-navy-900)'},
+  2:{name:'Speaker 2',initial:'2',color:'var(--sk-gold-600)'},
+  3:{name:'Speaker 3',initial:'3',color:'var(--sk-tan-400)'},
+  4:{name:'Speaker 4',initial:'4',color:'var(--sk-navy-800)'}
+};
+const SCRIPT = [
+  [1,'RU','Коллеги, доброе утро. Начинаем еженедельное совещание по операционным вопросам.'],
+  [2,'KZ','Қайырлы таң. Өткен аптаның қорытындысынан бастайық па?'],
+  [1,'RU','Да, давайте. Сначала закупки, потом бюджет, потом вторая площадка.'],
+  [3,'RU+KZ','По закупкам: он екі келісімшарттың төртеуі әлі қол қойылмаған.'],
+  [1,'RU','Айгерим, до пятницы подготовьте, пожалуйста, сводку по закупкам, которые ещё не подписаны.',{who:'Aigerim Seitkali',due:'2026-09-26',text:'Prepare a summary of unsigned procurement contracts'}],
+  [3,'RU','Хорошо, подготовлю.'],
+  [2,'KZ','Бюджет бойынша: төртінші тоқсанның жобасы дайын, бірақ қаржы бөлімі әлі көрмеді.'],
+  [1,'KZ','Данияр, жобаның бюджетін 30 қыркүйекке дейін қаржы бөліміне жіберіңіз.',{who:'Daniyar Nurlanov',due:'2026-09-30',text:'Send the Q4 project budget to the finance department'}],
+  [4,'RU','По второй площадке: простой оборудования за неделю — шесть часов.'],
+  [1,'RU+KZ','Марат, давайте, отчетты келесі дүйсенбіге дейін дайындаңыз, по второй площадке.',{who:'Marat Abenov',due:'2026-09-28',text:'Prepare the equipment downtime report for site 2'}],
+  [4,'RU','Принято. Причины в основном по электроснабжению.'],
+  [2,'RU','Тогда нужно согласовать окно на ремонт с поставщиком.'],
+  [1,'RU','Согласен. Кто возьмёт на себя переговоры с поставщиком?',{who:'',due:'',text:'Agree a maintenance window with the energy supplier'}],
+  [3,'KZ','Мен Ольгамен сөйлесемін, ол бұл келісімшартты жүргізеді.'],
+  [1,'RU','Хорошо. Следующий вопрос — обучение новых мастеров смены.'],
+  [2,'RU+KZ','График дайын, осы аптада бекітуге болады.']
+];
+const INITIAL = 7;
+const secToTime = s => [Math.floor(s/3600), Math.floor(s/60)%60, s%60].map(n => String(n).padStart(2,'0')).join(':');
+const fmt = d => d ? d.slice(8,10)+'.'+d.slice(5,7)+'.'+d.slice(0,4) : '';
+
+class Component extends DCLogic {
+  feedRef = React.createRef();
+  state = { shown: INITIAL, elapsed: 2531, paused: false, pinned: true, unseen: 0, ended: false,
+            items: [], hot: null, flash: null, editing: null, draft: {}, dismissed: [] };
+  componentDidMount() {
+    const items = [];
+    for (let i = 0; i < INITIAL; i++) if (SCRIPT[i][3]) items.push(this.mkItem(i));
+    this.setState({items}, () => this.toBottom());
+    this.clock = setInterval(() => { if (!this.state.paused && !this.state.ended) this.setState(s => ({elapsed: s.elapsed+1})); }, 1000);
+    this.feed = setInterval(() => this.next(), 3200);
+  }
+  componentWillUnmount() { clearInterval(this.clock); clearInterval(this.feed); clearTimeout(this.hotT); clearTimeout(this.flashT); }
+  lineTime(i) { return secToTime(2531 - (INITIAL - i) * 19); }
+  mkItem(i) { const e = SCRIPT[i][3]; return {id:i, line:i, text:e.text, who:e.who, due:e.due}; }
+  next() {
+    const s = this.state;
+    if (s.paused || s.ended || s.shown >= SCRIPT.length) return;
+    const i = s.shown, patch = {shown: i+1};
+    if (SCRIPT[i][3]) {
+      patch.items = [this.mkItem(i), ...s.items];
+      patch.hot = i; clearTimeout(this.hotT); this.hotT = setTimeout(() => this.setState({hot:null}), 5000);
+    }
+    if (!s.pinned) patch.unseen = s.unseen + 1;
+    this.setState(patch, () => { if (this.state.pinned) this.toBottom(); });
+  }
+  toBottom() { const el = this.feedRef.current; if (el) el.scrollTop = el.scrollHeight; }
+  onScroll = () => {
+    const el = this.feedRef.current; if (!el) return;
+    const pinned = el.scrollHeight - el.scrollTop - el.clientHeight < 48;
+    if (pinned !== this.state.pinned) this.setState({pinned, unseen: pinned ? 0 : this.state.unseen});
+  };
+  jumpTo(line) {
+    const el = this.feedRef.current, row = el && el.querySelector('#ln-'+line);
+    if (!row) return;
+    el.scrollTop = row.offsetTop - el.clientHeight/3;
+    this.setState({flash: line});
+    clearTimeout(this.flashT); this.flashT = setTimeout(() => this.setState({flash:null}), 2200);
+  }
+  updItem(id, patch) { this.setState(s => ({items: s.items.map(it => it.id===id ? {...it, ...patch} : it)})); }
+  renderVals() {
+    const s = this.state;
+    const lines = SCRIPT.slice(0, s.shown).map((l, i) => ({
+      domId: 'ln-'+i, time: this.lineTime(i), speaker: SPK[l[0]].name, initial: SPK[l[0]].initial, color: SPK[l[0]].color,
+      lang: l[1], text: l[2],
+      bg: s.flash===i ? 'oklch(0.93 0.04 75)' : (s.hot===i ? 'oklch(0.96 0.03 75)' : 'transparent')
+    }));
+    const items = s.items.filter(it => !s.dismissed.includes(it.id)).map(it => {
+      const editing = s.editing===it.id, isNew = s.hot===it.id;
+      return {
+        ...it, editing, viewing: !editing, isNew,
+        time: this.lineTime(it.line),
+        bg: isNew ? 'oklch(0.97 0.025 75)' : '#fff',
+        border: isNew ? 'var(--sk-gold-500)' : 'var(--sk-grey-300)',
+        whoLabel: it.who || 'Not detected — add', whoColor: it.who ? 'var(--sk-ink)' : 'oklch(0.48 0.14 28)',
+        dueLabel: it.due ? fmt(it.due) : 'Not detected — add', dueColor: it.due ? 'var(--sk-ink)' : 'oklch(0.48 0.14 28)',
+        dText: s.draft.text, dWho: s.draft.who, dDue: s.draft.due,
+        onSource: e => { e.preventDefault(); this.jumpTo(it.line); },
+        onEdit: () => this.setState({editing: it.id, draft: {text: it.text, who: it.who, due: it.due}}),
+        onDismiss: () => this.setState({dismissed: [...s.dismissed, it.id]}),
+        onDText: e => this.setState({draft: {...this.state.draft, text: e.target.value}}),
+        onDWho: e => this.setState({draft: {...this.state.draft, who: e.target.value}}),
+        onDDue: e => this.setState({draft: {...this.state.draft, due: e.target.value}}),
+        onCancel: () => this.setState({editing: null}),
+        onSave: () => { this.updItem(it.id, this.state.draft); this.setState({editing: null}); }
+      };
+    });
+    return {
+      lines, items, people: PEOPLE, itemCount: items.length, noItems: items.length===0,
+      elapsed: secToTime(s.elapsed), paused: s.paused, recording: !s.paused,
+      pauseLabel: s.paused ? 'Resume' : 'Pause',
+      recDot: React.createElement('span', {style:{width:10,height:10,borderRadius:'50%',background:'oklch(0.55 0.17 28)',animation:'recpulse 1.6s ease-in-out infinite',flex:'none'}}),
+      showPartial: !s.paused && s.shown < SCRIPT.length,
+      followLabel: s.pinned ? 'Following live' : 'Auto-scroll paused while you read',
+      showJump: !s.pinned,
+      jumpLabel: s.unseen ? s.unseen + (s.unseen===1 ? ' new line' : ' new lines') + ' · Jump to live' : 'Jump to live',
+      jumpLive: () => { this.toBottom(); this.setState({pinned: true, unseen: 0}); },
+      onScroll: this.onScroll, feedRef: this.feedRef,
+      togglePause: () => this.setState({paused: !s.paused}),
+      endMeeting: () => this.setState({ended: true}),
+      cancelEnd: () => this.setState({ended: false}),
+      finish: () => { location.href = 'Meeting Minutes Prototype.dc.html#summary-A'; },
+      ended: s.ended
+    };
+  }
+}
+</script>
+</body>
+</html>

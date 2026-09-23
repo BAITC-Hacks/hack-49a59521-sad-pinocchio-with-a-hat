@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/tokens/brand-assets.css">
+  <link rel="stylesheet" href="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/styles.css">
+  <script src="_ds/samruk-kazyna-design-system-ebccd62f-7dd6-4030-a936-9abc165c8f7a/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:var(--sk-grey-150);font-family:var(--font-corporate);color:var(--sk-ink)}
+    a{color:var(--sk-blue-600);text-decoration:none}a:hover{text-decoration:underline}
+    *{box-sizing:border-box}
+  </style>
+</helmet>
+<div style="display:flex;min-height:100vh;">
+  <aside style="width:232px;flex:none;background:var(--sk-navy-900);color:#fff;display:flex;flex-direction:column;padding:24px 0 20px;position:sticky;top:0;height:100vh;">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 22px 26px;">
+      <img src="assets/logo-white.svg" alt="Samruk-Kazyna" style="height:34px;width:auto;">
+    </div>
+    <div style="padding:0 22px 10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sk-tan-400);">Meeting minutes</div>
+    <nav style="display:flex;flex-direction:column;">
+      <a href="Meeting Minutes Prototype.dc.html#start" style="display:flex;align-items:center;gap:12px;padding:11px 22px;color:#fff;font-size:15px;" style-hover="background:var(--sk-navy-800);text-decoration:none">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="mic" size="18px" color="var(--sk-tan-400)" hint-size="18px,18px"></x-import>New meeting</a>
+      <a href="Meeting Minutes Prototype.dc.html#meetings" style="display:flex;align-items:center;gap:12px;padding:11px 22px;color:#fff;font-size:15px;" style-hover="background:var(--sk-navy-800);text-decoration:none">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="calendar-days" size="18px" color="var(--sk-tan-400)" hint-size="18px,18px"></x-import>Meetings</a>
+      <a href="#" style="display:flex;align-items:center;gap:12px;padding:11px 22px;color:var(--sk-gold-300);font-size:15px;background:var(--sk-navy-800);">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="list-checks" size="18px" color="var(--sk-gold-300)" hint-size="18px,18px"></x-import>Tasks</a>
+      <a href="Meeting Minutes Prototype.dc.html#reminders" style="display:flex;align-items:center;gap:12px;padding:11px 22px;color:#fff;font-size:15px;" style-hover="background:var(--sk-navy-800);text-decoration:none">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="bell" size="18px" color="var(--sk-tan-400)" hint-size="18px,18px"></x-import>
+        <span style="flex:1;">Reminders</span>
+        <span style="min-width:22px;height:20px;padding:0 6px;border-radius:10px;background:var(--sk-gold-500);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;">3</span></a>
+      <a href="Meeting Minutes Prototype.dc.html#settings" style="display:flex;align-items:center;gap:12px;padding:11px 22px;color:#fff;font-size:15px;" style-hover="background:var(--sk-navy-800);text-decoration:none">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="settings" size="18px" color="var(--sk-tan-400)" hint-size="18px,18px"></x-import>Settings</a>
+    </nav>
+    <div style="margin-top:auto;padding:16px 22px 0;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#fff;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--sk-gold-300);flex:none;"></span>On-premises · local models</div>
+      <div style="font-size:12px;line-height:1.4;color:var(--sk-tan-400);">Audio and text stay inside the internal network.</div>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:0;padding:32px 40px 60px;">
+    <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:24px;">
+      <div>
+        <h1 style="margin:0;font-size:30px;line-height:1.15;font-weight:400;color:var(--sk-navy-900);">Tasks</h1>
+        <p style="margin:6px 0 0;font-size:15px;color:var(--sk-grey-700);">Action items from all meetings. Click a row to see details.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sk-grey-700);">
+        <span style="padding:3px 8px;background:var(--sk-grey-100);border:1px solid var(--sk-grey-300);border-radius:2px;">Demo data · names anonymized</span>
+      </div>
+    </header>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="display:flex;gap:0;border:1px solid var(--sk-grey-300);background:#fff;border-radius:2px;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="4">
+          <button onClick="{{ tab.onClick }}" style="display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:0;font-family:var(--font-corporate);font-size:15px;cursor:pointer;background:{{ tab.bg }};color:{{ tab.color }};">{{ tab.label }}<span style="font-size:13px;opacity:.8;">{{ tab.count }}</span></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <select value="{{ person }}" onChange="{{ onPerson }}" style="height:38px;min-width:200px;padding:0 12px;border:1px solid var(--border-input);border-radius:2px;background:#fff;font-family:var(--font-corporate);font-size:15px;color:var(--sk-ink);">
+          <option value="">All responsible</option>
+          <sc-for list="{{ people }}" as="p" hint-placeholder-count="0"><option value="{{ p }}">{{ p }}</option></sc-for>
+        </select>
+        <select value="{{ range }}" onChange="{{ onRange }}" style="height:38px;min-width:180px;padding:0 12px;border:1px solid var(--border-input);border-radius:2px;background:#fff;font-family:var(--font-corporate);font-size:15px;color:var(--sk-ink);">
+          <option value="all">Any meeting date</option>
+          <option value="7">Last 7 days</option>
+          <option value="14">Last 14 days</option>
+          <option value="30">Last 30 days</option>
+        </select>
+        <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ clearFilters }}" style="border:0;background:none;color:var(--sk-blue-600);font-family:var(--font-corporate);font-size:15px;cursor:pointer;padding:0 4px;">Clear filters</button>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--sk-grey-300);overflow-x:auto;">
+      <div style="min-width:980px;">
+        <div style="display:grid;grid-template-columns:52px minmax(0,1fr) 150px 200px 150px 128px;align-items:center;height:40px;border-bottom:1px solid var(--sk-grey-300);background:var(--sk-grey-50);font-size:13px;color:var(--sk-grey-700);">
+          <span></span><span>Action item</span><span>Area</span><span>Responsible</span><span>Deadline</span><span>Status</span>
+        </div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+          <div onClick="{{ r.onOpen }}" style="display:grid;grid-template-columns:52px minmax(0,1fr) 150px 200px 150px 128px;align-items:center;min-height:{{ rowH }};border-bottom:1px solid var(--sk-grey-100);cursor:pointer;background:{{ r.rowBg }};" style-hover="background:var(--sk-grey-50)">
+            <span style="display:flex;justify-content:center;">
+              <button onClick="{{ r.onToggle }}" title="{{ r.toggleTitle }}" style="width:22px;height:22px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid {{ r.ringColor }};background:{{ r.ringBg }};">
+                <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}">
+                  <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="check" size="14px" color="#fff" hint-size="14px,14px"></x-import>
+                </sc-if>
+              </button>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:3px;padding:10px 16px 10px 0;min-width:0;">
+              <span style="font-size:15px;line-height:1.35;color:{{ r.textColor }};text-decoration:{{ r.strike }};text-wrap:pretty;">{{ r.text }}</span>
+              <span style="font-size:13px;color:var(--sk-grey-700);">{{ r.meetingTitle }} · {{ r.meetingDate }}</span>
+            </span>
+            <span style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span style="padding:2px 8px;font-size:12px;border:1px solid var(--sk-grey-300);color:var(--sk-grey-700);border-radius:2px;">{{ r.area }}</span>
+              <sc-if value="{{ r.urgent }}" hint-placeholder-val="{{ false }}">
+                <span style="padding:2px 8px;font-size:12px;background:var(--sk-gold-500);color:#fff;border-radius:2px;">Urgent</span>
+              </sc-if>
+            </span>
+            <span onClick="{{ stop }}" style="padding-right:12px;">
+              <select value="{{ r.who }}" onChange="{{ r.onAssign }}" title="Reassign" style="width:100%;height:32px;padding:0 6px;border:1px solid transparent;border-radius:2px;background:transparent;font-family:var(--font-corporate);font-size:14px;color:var(--sk-ink);cursor:pointer;" style-hover="border-color:var(--border-input);background:#fff">
+                <sc-for list="{{ people }}" as="p" hint-placeholder-count="0"><option value="{{ p }}">{{ p }}</option></sc-for>
+              </select>
+            </span>
+            <span onClick="{{ stop }}" style="padding-right:12px;">
+              <input type="date" value="{{ r.due }}" onChange="{{ r.onDate }}" title="Change deadline" style="width:100%;height:32px;padding:0 6px;border:1px solid transparent;border-radius:2px;background:transparent;font-family:var(--font-corporate);font-size:14px;color:{{ r.dueColor }};cursor:pointer;" style-hover="border-color:var(--border-input);background:#fff">
+            </span>
+            <span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;font-size:13px;border-radius:2px;background:{{ r.badgeBg }};color:{{ r.badgeColor }};border:1px solid {{ r.badgeBorder }};">{{ r.statusLabel }}</span>
+            </span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:48px 24px;text-align:center;color:var(--sk-grey-700);font-size:15px;">No action items match these filters.</div>
+        </sc-if>
+      </div>
+    </div>
+    <p style="margin:12px 0 0;font-size:13px;color:var(--sk-grey-700);">Circle marks an item complete. Responsible and deadline can be changed right in the row; every change is logged in the item's edit history.</p>
+  </main>
+</div>
+
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(23,51,93,.24);z-index:30;"></div>
+  <section style="position:fixed;top:0;right:0;bottom:0;width:480px;max-width:100%;background:#fff;z-index:31;box-shadow:0 4px 24px rgba(23,51,93,.16);display:flex;flex-direction:column;">
+    <div style="height:9px;background:var(--sk-gold-500);flex:none;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 28px 0;">
+      <span style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sk-grey-700);">Action item</span>
+      <button onClick="{{ close }}" title="Close" style="border:0;background:none;cursor:pointer;padding:4px;display:flex;">
+        <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="x" size="20px" color="var(--sk-navy-900)" hint-size="20px,20px"></x-import>
+      </button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:12px 28px 24px;display:flex;flex-direction:column;gap:22px;">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;height:24px;padding:0 10px;font-size:13px;border-radius:2px;background:{{ sel.badgeBg }};color:{{ sel.badgeColor }};border:1px solid {{ sel.badgeBorder }};">{{ sel.statusLabel }}</span>
+        <span style="padding:2px 8px;font-size:12px;border:1px solid var(--sk-grey-300);color:var(--sk-grey-700);border-radius:2px;">{{ sel.area }}</span>
+        <sc-if value="{{ sel.urgent }}" hint-placeholder-val="{{ false }}"><span style="padding:2px 8px;font-size:12px;background:var(--sk-gold-500);color:#fff;border-radius:2px;">Urgent</span></sc-if>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:13px;color:var(--sk-grey-700);">Description</span>
+        <textarea value="{{ sel.text }}" onChange="{{ sel.onText }}" onBlur="{{ sel.onTextCommit }}" rows="3" style="width:100%;resize:vertical;padding:10px 12px;border:1px solid var(--border-input);border-radius:2px;font-family:var(--font-corporate);font-size:18px;line-height:1.35;color:var(--sk-navy-900);"></textarea>
+      </label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:13px;color:var(--sk-grey-700);">Responsible</span>
+          <select value="{{ sel.who }}" onChange="{{ sel.onAssign }}" style="height:38px;padding:0 10px;border:1px solid var(--border-input);border-radius:2px;background:#fff;font-family:var(--font-corporate);font-size:15px;">
+            <sc-for list="{{ people }}" as="p" hint-placeholder-count="0"><option value="{{ p }}">{{ p }}</option></sc-for>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:13px;color:var(--sk-grey-700);">Deadline</span>
+          <input type="date" value="{{ sel.due }}" onChange="{{ sel.onDate }}" style="height:38px;padding:0 10px;border:1px solid var(--border-input);border-radius:2px;font-family:var(--font-corporate);font-size:15px;color:{{ sel.dueColor }};">
+        </label>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:13px;color:var(--sk-grey-700);">Source meeting</span>
+        <a href="Meeting Minutes Prototype.dc.html#summary" style="font-size:15px;">{{ sel.meetingTitle }} · {{ sel.meetingDate }} · {{ sel.platform }}</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <span style="font-size:13px;color:var(--sk-grey-700);">Transcript excerpt</span>
+          <a href="#" style="font-size:13px;">Open full transcript</a>
+        </div>
+        <div style="background:var(--sk-grey-50);border:1px solid var(--sk-grey-100);display:flex;flex-direction:column;">
+          <sc-for list="{{ sel.excerpt }}" as="l" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:10px;padding:10px 14px;background:{{ l.bg }};">
+              <span style="font-size:12px;color:var(--sk-grey-700);padding-top:2px;font-variant-numeric:tabular-nums;">{{ l.time }}</span>
+              <span style="display:flex;flex-direction:column;gap:2px;">
+                <span style="font-size:13px;font-weight:700;color:var(--sk-navy-900);">{{ l.sp }}</span>
+                <span style="font-size:15px;line-height:1.4;color:var(--sk-ink);">{{ l.text }}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <span style="font-size:13px;color:var(--sk-grey-700);">Edit history</span>
+        <sc-if value="{{ sel.noHistory }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:14px;color:var(--sk-grey-700);">Not corrected. Extracted automatically from the transcript.</span>
+        </sc-if>
+        <sc-for list="{{ sel.history }}" as="h" hint-placeholder-count="0">
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--sk-grey-100);font-size:14px;">
+            <span style="color:var(--sk-grey-700);font-variant-numeric:tabular-nums;">{{ h.when }}</span>
+            <span><span style="color:var(--sk-navy-900);">{{ h.who }}</span> — {{ h.what }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;padding:16px 28px;border-top:1px solid var(--sk-grey-300);">
+      <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" on-click="{{ sel.onToggle }}" style="{{ btnFlex }}" hint-size="200px,37px">{{ sel.toggleLabel }}</x-import>
+      <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="outline" on-click="{{ remind }}" hint-size="180px,37px">Send reminder</x-import>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:18px;padding:12px 18px;background:var(--sk-navy-800);color:#fff;font-size:15px;box-shadow:0 4px 24px rgba(23,51,93,.2);">
+    <span>{{ toast.msg }}</span>
+    <sc-if value="{{ toast.undo }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toast.undo }}" style="border:0;background:none;color:var(--sk-gold-300);font-family:var(--font-corporate);font-size:15px;cursor:pointer;padding:0;">Undo</button>
+    </sc-if>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;comfortable&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;comfortable&quot;,&quot;tsType&quot;:&quot;'comfortable'|'compact'&quot;},&quot;startWithDetailOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const TODAY = '2026-09-23';
+const PEOPLE = ['Aigerim Seitkali','Daniyar Nurlanov','Marat Abenov','Saule Tulegenova','Yerlan Kassym','Olga Petrova'];
+const MEETINGS = {
+  m1:{title:'Weekly operations',date:'2026-09-22',platform:'Zoom'},
+  m2:{title:'Production planning',date:'2026-09-16',platform:'Microsoft Teams'},
+  m3:{title:'Budget committee',date:'2026-09-10',platform:'Uploaded file'},
+  m4:{title:'HR digitalisation sync',date:'2026-09-03',platform:'Google Meet'}
+};
+const SEED = [
+  {id:1,m:'m1',who:'Aigerim Seitkali',due:'2026-09-26',area:'Procurement',urgent:true,text:'Prepare a summary of pending procurement contracts',t:'00:14:32',sp:'Chair',q:'Айгерим, до пятницы подготовьте, пожалуйста, сводку по закупкам, которые ещё не подписаны.'},
+  {id:2,m:'m1',who:'Daniyar Nurlanov',due:'2026-09-30',area:'Finance',text:'Send the revised Q4 project budget to the finance department',t:'00:21:05',sp:'Chair',q:'Данияр, жобаның бюджетін 30 қыркүйекке дейін қаржы бөліміне жіберіңіз.'},
+  {id:3,m:'m1',who:'Marat Abenov',due:'2026-09-28',area:'Operations',text:'Prepare the report on equipment downtime at site 2',t:'00:33:48',sp:'Deputy chair',q:'Марат, давайте, отчетты келесі дүйсенбіге дейін дайындаңыз, по второй площадке.'},
+  {id:4,m:'m2',who:'Saule Tulegenova',due:'2026-09-19',area:'HR',urgent:true,text:'Approve the training schedule for new shift supervisors',t:'00:09:12',sp:'Chair',q:'Сауле, график обучения для новых мастеров нужно утвердить до девятнадцатого.',hist:[{when:'17.09.2026 10:02',who:'O. Petrova',what:'Deadline: 18.09.2026 → 19.09.2026'}]},
+  {id:5,m:'m2',who:'Yerlan Kassym',due:'2026-09-21',area:'IT',text:'Set up access to the document archive for the audit team',t:'00:27:40',sp:'Speaker 3',q:'Ерлан, аудит тобына архивке қолжетімділік ашу керек, жексенбіге дейін.'},
+  {id:6,m:'m2',who:'Olga Petrova',due:'2026-09-25',area:'Operations',text:'Coordinate the maintenance window with the energy supplier',t:'00:41:03',sp:'Chair',q:'Ольга, согласуйте окно на ремонт с поставщиком электроэнергии.'},
+  {id:7,m:'m3',who:'Daniyar Nurlanov',due:'2026-09-15',area:'Finance',done:true,text:'Circulate the draft budget to committee members',t:'00:05:55',sp:'Secretary',q:'Бюджет жобасын комитет мүшелеріне таратып жіберейік, до пятнадцатого.'},
+  {id:8,m:'m3',who:'Marat Abenov',due:'2026-09-18',area:'Finance',urgent:true,text:'Justify the 12% increase in logistics costs',t:'00:18:20',sp:'Chair',q:'Марат, объясните рост логистических расходов на двенадцать процентов.',hist:[{when:'11.09.2026 09:40',who:'A. Seitkali',what:'Responsible: Yerlan Kassym → Marat Abenov'}]},
+  {id:9,m:'m3',who:'Aigerim Seitkali',due:'2026-10-05',area:'Procurement',text:'Collect three commercial offers for office equipment',t:'00:36:14',sp:'Deputy chair',q:'Айгерим, кеңсе техникасына үш коммерциялық ұсыныс жинаңыз.'},
+  {id:10,m:'m4',who:'Saule Tulegenova',due:'2026-09-12',area:'HR',done:true,text:'Share the e-signature onboarding guide with department heads',t:'00:11:30',sp:'Chair',q:'Сауле, инструкцию по ЭЦП разошлите руководителям подразделений.'},
+  {id:11,m:'m4',who:'Yerlan Kassym',due:'2026-09-24',area:'IT',text:'Test the self-hosted transcription server with the HR team',t:'00:24:02',sp:'Speaker 2',q:'Ерлан, давайте серверді HR командасымен тестілеп көрейік, на этой неделе.'},
+  {id:12,m:'m4',who:'Olga Petrova',due:'2026-10-10',area:'HR',text:'Draft the policy for storing meeting recordings',t:'00:38:47',sp:'Chair',q:'Ольга, подготовьте проект положения о хранении записей совещаний.'}
+];
+const fmt = d => d ? d.slice(8,10)+'.'+d.slice(5,7)+'.'+d.slice(0,4) : '';
+const daysBetween = (a,b) => Math.round((new Date(b)-new Date(a))/86400000);
+const statusOf = it => it.done ? 'done' : (it.due < TODAY ? 'overdue' : 'progress');
+const RED = 'oklch(0.48 0.14 28)';
+const ST = {
+  progress:{label:'In progress',bg:'#fff',color:'var(--sk-navy-900)',border:'var(--sk-navy-900)'},
+  overdue:{label:'Overdue',bg:'oklch(0.96 0.025 28)',color:RED,border:'oklch(0.85 0.06 28)'},
+  done:{label:'Completed',bg:'var(--sk-grey-100)',color:'var(--sk-grey-700)',border:'var(--sk-grey-300)'}
+};
+const stamp = () => '23.09.2026 14:20';
+
+class Component extends DCLogic {
+  state = {
+    items: SEED.map(s => ({...s, done:!!s.done, urgent:!!s.urgent, hist:s.hist||[]})),
+    status:'all', person:'', range:'all',
+    openId: this.props.startWithDetailOpen ? 4 : null,
+    toast:null
+  };
+  update(id, patch, what) {
+    this.setState(s => ({items: s.items.map(it => it.id!==id ? it : {...it, ...patch, hist: what ? [{when:stamp(),who:'You',what}, ...it.hist] : it.hist})}));
+  }
+  showToast(msg, undo) {
+    clearTimeout(this._t);
+    this.setState({toast:{msg, undo}});
+    this._t = setTimeout(() => this.setState({toast:null}), 4000);
+  }
+  toggle(id) {
+    const it = this.state.items.find(i => i.id===id);
+    const done = !it.done;
+    this.update(id, {done}, done ? 'Marked complete' : 'Reopened');
+    this.showToast(done ? 'Marked complete' : 'Reopened', () => { this.update(id, {done:!done}, 'Undo'); this.setState({toast:null}); });
+  }
+  assign(id, who) {
+    const it = this.state.items.find(i => i.id===id);
+    if (who===it.who) return;
+    this.update(id, {who}, 'Responsible: '+it.who+' → '+who);
+    this.showToast('Reassigned to '+who+'. They will be notified.');
+  }
+  setDue(id, due) {
+    const it = this.state.items.find(i => i.id===id);
+    if (!due || due===it.due) return;
+    this.update(id, {due}, 'Deadline: '+fmt(it.due)+' → '+fmt(due));
+    this.showToast('Deadline changed to '+fmt(due));
+  }
+  decorate(it) {
+    const st = statusOf(it), s = ST[st], m = MEETINGS[it.m];
+    return {
+      ...it, statusLabel:s.label, badgeBg:s.bg, badgeColor:s.color, badgeBorder:s.border,
+      meetingTitle:m.title, meetingDate:fmt(m.date), platform:m.platform,
+      dueColor: st==='overdue' ? RED : 'var(--sk-ink)',
+      textColor: it.done ? 'var(--sk-grey-700)' : 'var(--sk-navy-900)',
+      strike: it.done ? 'line-through' : 'none',
+      ringColor: it.done ? 'var(--sk-gold-500)' : 'var(--sk-grey-500)',
+      ringBg: it.done ? 'var(--sk-gold-500)' : '#fff',
+      rowBg: this.state.openId===it.id ? 'var(--sk-grey-50)' : '#fff',
+      toggleTitle: it.done ? 'Reopen' : 'Mark complete',
+      onOpen: () => this.setState({openId:it.id}),
+      onToggle: e => { e && e.stopPropagation && e.stopPropagation(); this.toggle(it.id); },
+      onAssign: e => this.assign(it.id, e.target.value),
+      onDate: e => this.setDue(it.id, e.target.value)
+    };
+  }
+  renderVals() {
+    const {items, status, person, range, openId} = this.state;
+    const base = items.filter(it => (!person || it.who===person) && (range==='all' || daysBetween(MEETINGS[it.m].date, TODAY) <= +range));
+    const count = k => k==='all' ? base.length : base.filter(i => statusOf(i)===k).length;
+    const tabs = [['all','All'],['progress','In progress'],['overdue','Overdue'],['done','Completed']].map(([k,label]) => ({
+      label, count:count(k),
+      bg: status===k ? 'var(--sk-navy-900)' : '#fff',
+      color: status===k ? '#fff' : 'var(--sk-navy-900)',
+      onClick: () => this.setState({status:k})
+    }));
+    const order = {overdue:0, progress:1, done:2};
+    const rows = base.filter(i => status==='all' || statusOf(i)===status)
+      .sort((a,b) => order[statusOf(a)]-order[statusOf(b)] || a.due.localeCompare(b.due))
+      .map(it => this.decorate(it));
+    const selIt = items.find(i => i.id===openId);
+    let sel = null;
+    if (selIt) {
+      const d = this.decorate(selIt), m = MEETINGS[selIt.m];
+      const t = selIt.t.split(':').map(Number), sec = t[0]*3600+t[1]*60+t[2];
+      const ts = n => { const x = sec+n; return String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0'); };
+      sel = {...d,
+        excerpt:[
+          {time:ts(-24), sp:'Speaker 2', text:'По этому вопросу есть обновления с прошлого совещания.', bg:'transparent'},
+          {time:ts(0), sp:selIt.sp, text:selIt.q, bg:'oklch(0.95 0.03 75)'},
+          {time:ts(11), sp:'Speaker 4', text:'Жақсы, түсінікті. Принято.', bg:'transparent'}
+        ],
+        history: selIt.hist, noHistory: selIt.hist.length===0,
+        toggleLabel: selIt.done ? 'Reopen' : 'Mark complete',
+        onText: e => this.setState(s => ({items: s.items.map(i => i.id===selIt.id ? {...i, draft:e.target.value} : i)})),
+        onTextCommit: () => { const cur = this.state.items.find(i => i.id===selIt.id); if (cur.draft!=null && cur.draft!==cur.text) this.update(selIt.id, {text:cur.draft, draft:null}, 'Description edited'); },
+        onToggle: () => this.toggle(selIt.id)
+      };
+      if (selIt.draft!=null) sel.text = selIt.draft;
+    }
+    return {
+      tabs, rows, empty: rows.length===0, people: PEOPLE, person, range,
+      rowH: this.props.density==='compact' ? '48px' : '64px',
+      hasFilters: !!person || range!=='all' || status!=='all',
+      onPerson: e => this.setState({person:e.target.value}),
+      onRange: e => this.setState({range:e.target.value}),
+      clearFilters: () => this.setState({person:'', range:'all', status:'all'}),
+      stop: e => e.stopPropagation(),
+      open: !!sel, sel: sel || {}, close: () => this.setState({openId:null}),
+      btnFlex: {flex:1, padding:'0 20px'},
+      remind: () => sel && this.showToast('Reminder sent to '+sel.who),
+      toast: this.state.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
