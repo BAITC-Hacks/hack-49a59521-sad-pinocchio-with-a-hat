@@ -204,7 +204,7 @@
               </div>
             </sc-if>
             <sc-if value="{{ procDone }}" hint-placeholder-val="{{ false }}">
-              <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" size="lg" full-width="{{ true }}" on-click="{{ goSummary }}" hint-size="100%,48px">Open summary</x-import>
+              <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Button" variant="primary" size="lg" full-width="{{ true }}" disabled="{{ !procDone }}" on-click="{{ goSummary }}" hint-size="100%,48px">Open summary</x-import>
             </sc-if>
           </div>
         </div>
@@ -614,7 +614,9 @@ class Component extends DCLogic {
     const v = variant || this.state.variant;
     if (screen === 'processing' && v === 'A') screen = 'start';
     this.setState({screen, variant: v});
-    if (screen === 'processing' && this.state.pct === 0) this.runProgress();
+    // Uploaded recordings are processed by the backend. The local demo timer is
+    // only valid for the live prototype and must not unlock the summary early.
+    if (screen === 'processing' && v === 'A' && this.state.pct === 0) this.runProgress();
     window.scrollTo(0, 0);
   }
   runProgress() {
@@ -630,18 +632,22 @@ class Component extends DCLogic {
     const file = this.state.file;
     if (!file) return;
     try {
+      clearTimeout(this._backendPoll);
+      this.setState({meetingId: null, backendMeeting: null});
       this.setState({backendError: null, backendStatus: 'uploading', items: [], transcript: [], pct: 3});
       const form = new FormData();
       form.append('file', file, file.name);
       form.append('title', 'Board preparation');
       form.append('meeting_date', new Date().toISOString().slice(0, 10));
       const upload = await fetch(API_BASE + '/api/meetings/upload', {method: 'POST', body: form});
-      if (!upload.ok) throw new Error(await upload.text());
+      if (!upload.ok) throw new Error('Upload failed: ' + await upload.text());
       const created = await upload.json();
       this.setState({meetingId: created.meeting_id, backendStatus: 'uploaded', pct: 8});
       const process = await fetch(API_BASE + '/api/meetings/' + created.meeting_id + '/process', {method: 'POST'});
-      if (!process.ok) throw new Error(await process.text());
-      this.pollBackendStatus(created.meeting_id);
+      if (!process.ok) throw new Error('Processing could not be started: ' + await process.text());
+      const processInfo = await process.json();
+      this.setState({backendStatus: processInfo.status || 'processing'});
+      await this.pollBackendStatus(created.meeting_id);
     } catch (err) {
       this.setState({backendError: err.message || String(err), backendStatus: 'failed', pct: 0});
       this.toastMsg('Could not start processing');
@@ -653,13 +659,15 @@ class Component extends DCLogic {
       if (!response.ok) throw new Error(await response.text());
       const status = await response.json();
       if (status.status === 'processing') {
-        this.setState({backendStatus: status.status, pct: Math.max(this.state.pct, 30)});
+        this.setState({backendStatus: status.status});
       } else if (status.status === 'completed') {
         const meetingResponse = await fetch(API_BASE + '/api/meetings/' + meetingId);
+        if (!meetingResponse.ok) throw new Error('Completed meeting result could not be loaded: ' + await meetingResponse.text());
         const meeting = await meetingResponse.json();
         if (meeting.providers && meeting.providers.stt === 'mock') {
           throw new Error('Backend работает в mock-режиме STT и не анализирует загруженный файл. Установите STT_PROVIDER=local и перезапустите backend.');
         }
+        if (!meeting.transcript || !Array.isArray(meeting.transcript.segments)) throw new Error('Backend completed without a transcript.');
         const items = (meeting.tasks || []).map((task, index) => ({id: task.id || index + 1, text: task.title, who: task.assignee_name || task.assignee || '', due: task.deadline || '', time: ''}));
         const transcript = ((meeting.transcript && meeting.transcript.segments) || []).map(segment => ({time: this.formatSeconds(segment.start), sp: segment.speaker_id || 'Speaker', lang: meeting.language || 'RU', text: segment.text, bg: 'transparent'}));
         this.setState({backendStatus: 'completed', backendMeeting: meeting, items, transcript, pct: 100});
@@ -670,7 +678,7 @@ class Component extends DCLogic {
       } else {
         this.setState({backendStatus: status.status});
       }
-      if (status.status === 'uploaded' || status.status === 'processing') this._backendPoll = setTimeout(() => this.pollBackendStatus(meetingId), 3000);
+      if (status.status === 'uploaded' || status.status === 'processing') this._backendPoll = setTimeout(() => this.pollBackendStatus(meetingId), 1500);
     } catch (err) {
       this.setState({backendStatus: 'failed', backendError: err.message || String(err)});
       this.toastMsg('Could not read processing status');
