@@ -39,7 +39,7 @@
 
 <div style="display:flex;min-height:calc(100vh - 44px);">
   <aside style="width:232px;flex:none;background:var(--sk-navy-900);color:#fff;display:flex;flex-direction:column;padding:24px 0 20px;">
-    <div style="padding:0 22px 26px;"><img src="assets/logo-white.svg" alt="Samruk-Kazyna" style="height:34px;width:auto;"></div>
+    <div style="padding:0 22px 26px;font-size:22px;letter-spacing:.02em;color:#fff;">Meeting AI</div>
     <div style="padding:0 22px 10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sk-tan-400);">Meeting minutes</div>
     <nav style="display:flex;flex-direction:column;">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
@@ -118,7 +118,7 @@
               </sc-for>
             </div>
             <sc-if value="{{ isUploadTab }}" hint-placeholder-val="{{ true }}">
-              <input id="meeting-file-input" type="file" accept="audio/*,video/*" style="display:none;" onChange="{{ onFileChange }}">
+              <input id="meeting-file-input" type="file" accept="audio/*,video/*" onChange="{{ onFileChange }}" style="width:100%;padding:12px;border:1px solid var(--sk-grey-400);background:#fff;color:var(--sk-navy-900);font-family:var(--font-corporate);font-size:14px;">
               <sc-if value="{{ noFile }}" hint-placeholder-val="{{ true }}">
                 <button onClick="{{ pickFile }}" style="height:180px;border:1.5px dashed var(--sk-grey-400);background:var(--sk-grey-50);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;font-family:var(--font-corporate);">
                   <x-import component-from-global-scope="SamrukKazynaDesignSystem_ebccd6.Icon" name="upload" size="28px" color="var(--sk-gold-500)" hint-size="28px,28px"></x-import>
