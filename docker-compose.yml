@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: .
+      target: ${STT_PROVIDER:-mock}
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      STT_PROVIDER: ${STT_PROVIDER:-mock}
+      AI_PROVIDER: ${AI_PROVIDER:-mock}
+      DIARIZATION_PROVIDER: ${DIARIZATION_PROVIDER:-mock}
+      STT_API_URL: ${STT_API_URL:-}
+      STT_API_KEY: ${STT_API_KEY:-}
+      STT_MODEL: ${STT_MODEL:-}
+      AI_API_URL: ${AI_API_URL:-}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_MODEL: ${AI_MODEL:-}
+      WHISPER_MODEL: ${WHISPER_MODEL:-small}
+      WHISPER_DEVICE: ${WHISPER_DEVICE:-cpu}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+      WHISPER_DOWNLOAD_ROOT: /models
+      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB:-500}
+      STORAGE_DIR: /data
+      PDF_FONT_PATH: /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+      API_TIMEOUT_SECONDS: ${API_TIMEOUT_SECONDS:-180}
+    volumes:
+      - uploads:/data/uploads
+      - results:/data/results
+      - ./models:/models:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+volumes:
+  uploads:
+  results:
+
